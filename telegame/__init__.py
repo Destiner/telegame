@@ -66,12 +66,13 @@ class Bot:
         self.messages['greeting'] = greeting_message
         return self
 
-    def start(self):
+    def start(self, interval=0):
         """
         Starts the bot.
+        :param interval: Interval between requests to the server in seconds
         """
         self._set_categories()
-        self._start_polling()
+        self._start_polling(interval)
 
     def _set_categories(self):
         self.categories = {}
@@ -85,7 +86,7 @@ class Bot:
             category = self.categories[category_name]
             category.append(game)
 
-    def _start_polling(self):
+    def _start_polling(self, interval):
         while True:
             offset = self.last_update_id + 1
             response = core.get_updates(self.token, offset)
@@ -97,7 +98,7 @@ class Bot:
                 continue
             updates = data_json['result']
             self._handle_updates(updates)
-            time.sleep(0.1)
+            time.sleep(interval)
 
     def _handle_updates(self, updates):
         if len(updates) == 0:
