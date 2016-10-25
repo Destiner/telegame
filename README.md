@@ -1,6 +1,10 @@
 # telegame
 This library allows to create a bot that distribute your HTML5 based games. It is simple and convinient.
 
+```
+pip install telegame
+```
+
 ## Features
 * Add any number of games
 * Game categories (e. g. Sport, Strategy)
